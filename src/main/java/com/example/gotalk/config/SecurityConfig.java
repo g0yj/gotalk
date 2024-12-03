@@ -22,6 +22,7 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return web -> {
             web.ignoring()
+                    .requestMatchers(AntPathRequestMatcher.antMatcher("/node_modules/**"))
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
         };
     }
