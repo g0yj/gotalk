@@ -40,7 +40,13 @@ public class SecurityConfig {
                                 AntPathRequestMatcher.antMatcher("/login-by-email"),
                                 AntPathRequestMatcher.antMatcher("/search/study")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET,"/profile/*")).permitAll()
-                        .anyRequest().authenticated());
+                        .anyRequest().authenticated())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/", true)
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/"));
         return http.build();
     }
 

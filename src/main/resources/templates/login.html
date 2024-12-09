@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments.html :: head"></head>
+
+    <body class="bg-light">
+        <div th:replace="fragments.html :: main-nav"></div>
+
+        <div class ="container">
+            <h1> 로그인</h1>
+            <div class="row justifiy-content-center">
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                    <p>이메일(또는 닉네임)과 패스워드가 정확하지 않습니다</p>
+                    <p>또는 확인되지 않은 이메일을 사용했습니다. 이메일을 사용해 주세요</p>
+                    <p>
+                        확인 후 다시 임력하거나, <a th:href="@{/find-password}">패스워드 찾기</a>를 이용하세요
+                    </p>
+                </div>
+            </div>
+
+            <form class="needs-validation was-validated col-sm-6"
+                  th:action="@{/login}" method="post" novalidate>
+                <div class="form-group">
+                    <label for="username" class="form-label">이메일 또는 닉네임</label>
+                    <input type="text"  class="form-control" required id="username" name="username" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">
+                        가입 시 사용한 이메일 또는 닉네임을 사용해주세요
+                    </small>
+                    <small class ="invalid-feedback"> 이메일을 입력하세요</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">비밀번호</label>
+                    <input type="password"  class="form-control" required id="password" name="password" aria-describedby="passwordHelp">
+                    <small id="passwordHelp" class="form-text text-muted">
+                        <a th:href="@{/emaillogin}">패스 없이 로그인하기</a>
+                    </small>
+                    <small class ="invalid-feedback">패스워드를 입력하세요</small>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-primary">로그인</button>
+            </form>
+
+        </div>
+
+       <script th:replace="fragments.html :: form-validation"></script>
+    </body>
+</html>
